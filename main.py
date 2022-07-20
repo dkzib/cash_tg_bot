@@ -19,6 +19,10 @@ from aiogram import types
 from config import *
 ##########################################################################################################################
 
+print('asdasdasdasdadasd')
+print('asdasdasdasdadasd')
+print('asdasdasdasdadasd')
+
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 dp.middleware.setup(LoggingMiddleware())
