@@ -17,16 +17,15 @@ from messages import *
 from aiogram import types
 
 from config import *
+import admin_panel
+from admin_panel import *
+
 ##########################################################################################################################
 
-print('asdasdasdasdadasd')
-print('asdasdasdasdadasd')
-print('asdasdasdasdadasd')
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 dp.middleware.setup(LoggingMiddleware())
-
 
 
 @dp.message_handler(commands=["start"])
@@ -34,16 +33,24 @@ async def menu(message: types.Message, state: FSMContext):
 	user_id_db = message.chat.id
 	if user_id_db == 5559462803:
 		await bot.send_message(message.chat.id, text=f'палю как админа')
-	b1 = KeyboardButton('🔐 Профиль 👤')
-	b2 = KeyboardButton('⚙ Настройки ⚙')
-	b3 = KeyboardButton('🛠 Другое 🛠')
+		b1 = KeyboardButton('🔐 Профиль 👤')
+		b2 = KeyboardButton('⚙ Настройки ⚙')
+		b3 = KeyboardButton('🛠 Другое 🛠')
+		b4 = KeyboardButton('⚠ Админ панель ⚠')
 
-	b33 = KeyboardButton('/start')
-	b4 = KeyboardButton('Как сломать бота (для терентия)')
-	b0 = KeyboardButton('🤙 Интерактивное меню 🤙')
+		buttons = ReplyKeyboardMarkup(resize_keyboard=True)
+		buttons.add(b1).add(b2).add(b3).add(b4)
+	else:
+		b1 = KeyboardButton('🔐 Профиль 👤')
+		b2 = KeyboardButton('⚙ Настройки ⚙')
+		b3 = KeyboardButton('🛠 Другое 🛠')
 
-	buttons = ReplyKeyboardMarkup(resize_keyboard=True)
-	buttons.add(b1).add(b2).add(b3)
+		b33 = KeyboardButton('/start')
+		b4 = KeyboardButton('Как сломать бота (для терентия)')
+		b0 = KeyboardButton('🤙 Интерактивное меню 🤙')
+
+		buttons = ReplyKeyboardMarkup(resize_keyboard=True)
+		buttons.add(b1).add(b2).add(b3)
 
 
 
@@ -132,6 +139,18 @@ async def first_test_state_case_met(message: types.Message):
 		await bot.send_message(message.chat.id, text=f'Не понимаю о чём вы, введите еще раз.')
 
 '''==================================================HANDLERS СООБЩЕНИЙ=================================================='''
+
+
+@dp.message_handler(text=['⚠ Админ панель ⚠'])
+async def admin_panel1(message: types.Message):
+	b1 = KeyboardButton('⚠ Сколько пользователей в базе ⚠')
+	b2 = KeyboardButton('⚠ Вывести ники всех пользователей ⚠')
+	b3 = KeyboardButton('⚠ Вывести все поля бд ⚠')
+	b4 = KeyboardButton('🔙 Назад 🔙')
+
+	buttons = ReplyKeyboardMarkup(resize_keyboard=True)
+	buttons.add(b1).add(b2).add(b3).add(b4)
+	await bot.send_message(message.chat.id, f'Показываю админ панель.', reply_markup=buttons)
 
 
 @dp.message_handler(text=['🏦 Проверить баланс 🏦'])
