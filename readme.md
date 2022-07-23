@@ -1,3 +1,3 @@
 tgbot
 
-add config.py with TOKEN = "your token is here"
+create config.py with TOKEN = "your token is here"
